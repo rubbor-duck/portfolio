@@ -76,6 +76,17 @@
                 </div>
             </section>
 
+            <!-- Projects Section -->
+            <section class="mb-20">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="h-8 w-1.5 bg-blue-600 rounded-full"></div>
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-800">Featured Projects</h2>
+                </div>
+                <div id="projects-grid" class="grid md:grid-cols-2 gap-8">
+                    <!-- Projects will be injected here by JavaScript -->
+                </div>
+            </section>
+
             <!-- BYU-I Difference -->
             <section class="bg-slate-900 text-white rounded-3xl p-10 md:p-16 mb-20 relative overflow-hidden">
                 <div class="relative z-10 max-w-2xl">
@@ -100,8 +111,80 @@
     </div>
 
     <script>
-        // Initialize icons
-        lucide.createIcons();
+        // Project Data Structure
+        const projects = [
+            {
+                title: "Place Holder",
+                category: "hardware",
+                tags: ["C", "STM32", "FreeRTOS"],
+                description: "Developed a PID controller for a self-balancing robot. Optimized loop timing to achieve stable balance on uneven terrain.",
+                link: "#"
+            },
+            {
+                title: "RISC-V 32i Processor Design",
+                category: "hardware",
+                tags: ["Verilog", "FPGA", "Vivado"],
+                description: "Designed and simulated a single-cycle processor. Validated instructions via test benches and physical FPGA deployment.",
+                link: "#"
+            },
+            {
+                title: "Electrical Circuit Calculator",
+                category: "software",
+                tags: ["Python"],
+                description: "Developed a Python program for circuit analysis including parallel resistor values, voltage/current dividers, and 2x3 matrices",
+                link: "#"
+            },
+            {
+                title: "Place Holder",
+                category: "software",
+                tags: ["C", "POSIX", "Systems"],
+                description: "Custom shell featuring command execution, piping, and background process management. Built for CS 345.",
+                link: "#"
+            },
+            {
+                title: "Place Holder",
+                category: "software",
+                tags: ["C++", "AES", "Security"],
+                description: "Local secure storage using AES encryption and a custom file header system for data integrity validation.",
+                link: "#"
+            }
+        ];
+
+        // Function to render projects
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = projects.map(project => `
+                <div class="flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:border-blue-300 transition-all group">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ${
+                                project.category === 'hardware' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700'
+                            }">
+                                ${project.category}
+                            </span>
+                            <a href="${project.link}" class="text-slate-400 hover:text-blue-600 transition-colors">
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 group-hover:text-blue-600 transition-colors">${project.title}</h3>
+                        <p class="text-slate-600 leading-relaxed mb-6">${project.description}</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            ${project.tags.map(tag => `
+                                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-semibold">${tag}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Re-initialize icons after adding HTML content
+            lucide.createIcons();
+        }
+
+        // Initialize on load
+        window.onload = () => {
+            renderProjects();
+        };
     </script>
 </body>
 </html>
