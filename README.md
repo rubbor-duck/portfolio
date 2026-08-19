@@ -1,1 +1,1 @@
-This the code to my online portfolio. To access it, go to https://rubbor-duck.github.io/portfolio/.
+This the code to my online portfolio. To view my portfolio, go to https://rubbor-duck.github.io/portfolio/.
